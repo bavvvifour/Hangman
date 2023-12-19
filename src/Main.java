@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class Main {
-    private static int LIVES = 5;
+    private static int LIVES = 6;
 
     public static void main(String[] args) throws IOException {
         initGame();
@@ -14,11 +14,20 @@ public class Main {
         System.out.println(unknownWorld);
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Нажмите [E]nter, чтобы начать игру.");
-        System.out.println("Нажмите [C]lose, чтобы закончить игру.");
+        System.out.println("Нажмите [е], чтобы начать игру.");
+        System.out.println("Нажмите [с], чтобы закончить игру.");
         char input = scanner.next().toLowerCase(Locale.ROOT).charAt(0);
 
         if (input == 'е') {
+            System.out.println("""
+                    ___________               
+                    |   \\    |
+                    |  
+                    |  
+                    |  
+                    |
+                    ~~~~~~~~~~~
+                    """);
             guessWord(unknownWorld);
 
         } else if (input == 'с') {
@@ -67,6 +76,7 @@ public class Main {
             } else {
                 LIVES -= 1;
                 System.out.println("Упс, ошибка. У вас осталось " + LIVES);
+                drawHangman(LIVES);
             }
         }
         if (emptyWord.equals(unknownWord)) {
@@ -99,6 +109,65 @@ public class Main {
             } else {
                 System.out.println("Введите другую букву");
             }
+        }
+    }
+
+    public static void drawHangman(int LIVES) {
+        switch (LIVES) {
+            case 0 -> System.out.println("""
+                    ___________                
+                    |   \\    |
+                    |   ()
+                    |  /[]\\
+                    |  /  \\
+                    |
+                    ~~~~~~~~~~~
+                    """);
+            case 1 -> System.out.println("""
+                    ___________                
+                    |   \\    |
+                    |   ()
+                    |  /[]\\
+                    |  /   
+                    |
+                    ~~~~~~~~~~~
+                    """);
+            case 2 -> System.out.println("""
+                    ___________                
+                    |   \\    |
+                    |   ()
+                    |  /[]\\
+                    |  
+                    |
+                    ~~~~~~~~~~~
+                    """);
+            case 3 -> System.out.println("""
+                    ___________                
+                    |   \\    |
+                    |   ()
+                    |  /[]
+                    |  
+                    |
+                    ~~~~~~~~~~~
+                    """);
+            case 4 -> System.out.println("""
+                    ___________                
+                    |   \\    |
+                    |   ()
+                    |   []
+                    |  
+                    |
+                    ~~~~~~~~~~~
+                    """);
+            case 5 -> System.out.println("""
+                    ___________               
+                    |   \\    |
+                    |   ()
+                    |  
+                    |  
+                    |
+                    ~~~~~~~~~~~
+                    """);
         }
     }
 }
